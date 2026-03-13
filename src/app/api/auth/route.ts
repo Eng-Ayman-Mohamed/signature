@@ -172,7 +172,8 @@ export async function POST(request: NextRequest) {
 
 // Helper function to set auth cookies
 function setAuthCookies(response: NextResponse, user: any) {
-  // Set auth token cookie (secure, httpOnly)
+  // Set auth token cookie (secure, httpOnly) - this is all we need
+  // User data will be fetched from API when needed
   const authToken = Buffer.from(JSON.stringify({
     userId: user.id,
     exp: Date.now() + 7 * 24 * 60 * 60 * 1000, // 7 days
@@ -186,39 +187,8 @@ function setAuthCookies(response: NextResponse, user: any) {
     path: '/',
   });
 
-  // Set user data in a non-httpOnly cookie for client access
-  const userData = {
-    id: user.id,
-    email: user.email,
-    name: user.name,
-    username: user.username,
-    githubId: user.githubId,
-    googleId: user.googleId,
-    avatarUrl: user.avatarUrl,
-    bio: user.bio,
-    location: user.location,
-    company: user.company,
-    blog: user.blog,
-  };
-
-  response.cookies.set('user_data', JSON.stringify(userData), {
-    httpOnly: false,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    maxAge: 7 * 24 * 60 * 60, // 7 days
-    path: '/',
-  });
-
-  // Set portfolio in cookie if available
-  if (user.portfolio) {
-    response.cookies.set('portfolio_data', JSON.stringify(user.portfolio), {
-      httpOnly: false,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 7 * 24 * 60 * 60, // 7 days
-      path: '/',
-    });
-  }
+  // Don't store user data in cookies - too large
+  // Client will fetch user data from API after login
 }
 
 // GET - Check if email exists

@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_DATABASE_URL")
 }
 
 model User {
@@ -24,7 +25,7 @@ model User {
   location     String?
   company      String?
   blog         String?
-  role         String     @default("USER")  // USER or ADMIN
+  role         String     @default("USER") // USER or ADMIN
   isActive     Boolean    @default(true)
   lastLoginAt  DateTime?
   createdAt    DateTime   @default(now())
@@ -53,19 +54,19 @@ model Portfolio {
 }
 
 model Content {
-  id                String   @id @default(cuid())
-  portfolioId       String   @unique
-  jobTitle          String?
-  aboutText         String?
-  resumeUrl         String?
-  contactEmail      String?
-  linkedinUrl       String?
-  githubUrl         String?
-  twitterUrl        String?
-  websiteUrl        String?
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-  portfolio         Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  id          String    @id @default(cuid())
+  portfolioId String    @unique
+  jobTitle    String?
+  aboutText   String?
+  resumeUrl   String?
+  contactEmail String?
+  linkedinUrl String?
+  githubUrl   String?
+  twitterUrl  String?
+  websiteUrl  String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
 }
 
 model Project {
@@ -86,6 +87,8 @@ model Project {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   portfolio       Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@index([portfolioId])
 }
 
 model Experience {
@@ -103,6 +106,8 @@ model Experience {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   portfolio    Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@index([portfolioId])
 }
 
 model Education {
@@ -121,6 +126,8 @@ model Education {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   portfolio    Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@index([portfolioId])
 }
 
 model Skill {
@@ -134,19 +141,21 @@ model Skill {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   portfolio    Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@index([portfolioId])
 }
 
 model SystemSettings {
-  id                 String   @id @default(cuid())
-  siteName           String   @default("Portfolio Generator")
-  siteDescription    String?
-  maintenanceMode    Boolean  @default(false)
-  maintenanceMessage String?
-  allowRegistration  Boolean  @default(true)
-  defaultAccentColor String   @default("#10b981")
-  maxPortfoliosPerUser Int    @default(1)
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  id                  String   @id @default(cuid())
+  siteName            String   @default("Portfolio Generator")
+  siteDescription     String?
+  maintenanceMode     Boolean  @default(false)
+  maintenanceMessage  String?
+  allowRegistration   Boolean  @default(true)
+  defaultAccentColor  String   @default("#10b981")
+  maxPortfoliosPerUser Int     @default(1)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 }
 
 model AuditLog {
@@ -160,17 +169,20 @@ model AuditLog {
   userAgent  String?
   createdAt  DateTime @default(now())
   user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([action])
 }
 
 model Analytics {
-  id                String   @id @default(cuid())
-  date              DateTime @unique
-  totalUsers        Int      @default(0)
-  newUsers          Int      @default(0)
-  totalPortfolios   Int      @default(0)
-  newPortfolios     Int      @default(0)
-  publishedPortfolios Int    @default(0)
-  totalViews        Int      @default(0)
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  id                 String   @id @default(cuid())
+  date               DateTime @unique
+  totalUsers         Int      @default(0)
+  newUsers           Int      @default(0)
+  totalPortfolios    Int      @default(0)
+  newPortfolios      Int      @default(0)
+  publishedPortfolios Int     @default(0)
+  totalViews         Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 }
