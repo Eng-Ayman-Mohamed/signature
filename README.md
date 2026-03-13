@@ -6,6 +6,12 @@
 [![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?style=flat-square&logo=prisma)](https://www.prisma.io/)
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-yellow.svg?style=flat-square)](https://opensource.org/licenses/GPL-3.0)
 
+---
+
+### 📖 Documentation & Help
+[🚀 Platform User Guide](./SUPPORT.md) | [⚖️ License](./LICENSE)
+
+---
 **Signature** is a high-performance, full-stack portfolio builder that empowers developers and creatives to launch a professional online presence in minutes. With 5 distinct visual "Personalities"—ranging from terminal-inspired code themes to immersive 3D futuristic designs—your portfolio will never look generic again.
 
 ---
