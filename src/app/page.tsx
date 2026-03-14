@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Eye, EyeOff, Settings, User, Briefcase, GraduationCap, FolderGit2, Wrench, Mail, Palette, Layout, LogOut, ChevronRight } from 'lucide-react';
-import { GitHubLogin } from '@/components/auth/github-login';
+import { LandingPage } from '@/components/landing/landing-page';
 import { AboutEditor } from '@/components/editor/about-editor';
 import { ExperienceEditor } from '@/components/editor/experience-editor';
 import { EducationEditor } from '@/components/editor/education-editor';
@@ -267,7 +267,7 @@ export default function PortfolioBuilder() {
   }
 
   if (!isAuthenticated) {
-    return <GitHubLogin />;
+    return <LandingPage />;
   }
 
   return (
