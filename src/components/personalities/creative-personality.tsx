@@ -4,6 +4,7 @@ import { useMemo, useSyncExternalStore } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Linkedin, Github, Twitter, Globe, MapPin, Sparkles, Palette, Brush } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import { useTranslations } from 'next-intl';
 import type { Portfolio } from '@/store/portfolio-store';
 import type { User } from '@/store/auth-store';
 
@@ -32,6 +33,7 @@ export function CreativePersonality({ portfolio, user, isMobilePreview }: Creati
   const { content, projects, experiences, educations, skills, accentColor, layoutOrder, reduceMotion: portfolioReduceMotion } = portfolio;
   const { resolvedTheme } = useTheme();
   const systemReduceMotion = useReducedMotion();
+  const t = useTranslations('personalities');
   
   // Respect both portfolio setting and system preference
   const reduceMotion = portfolioReduceMotion || systemReduceMotion;
@@ -156,7 +158,7 @@ export function CreativePersonality({ portfolio, user, isMobilePreview }: Creati
                     className="flex items-center gap-1 hover:text-slate-600 dark:hover:text-slate-300"
                   >
                     <Globe className="w-4 h-4" style={{ color: accentColor }} />
-                    Website
+                    {t('labels.website')}
                   </a>
                 )}
               </div>
@@ -233,7 +235,7 @@ export function CreativePersonality({ portfolio, user, isMobilePreview }: Creati
             >
               <Mail className="w-4 h-4 md:w-6 md:h-6" style={{ color: accentColor }} />
             </div>
-            <h2 className="text-xl md:text-3xl font-bold">Contact</h2>
+            <h2 className="text-xl md:text-3xl font-bold">{t('sections.contact')}</h2>
           </div>
 
           <div className="flex flex-wrap gap-3">
@@ -319,7 +321,7 @@ export function CreativePersonality({ portfolio, user, isMobilePreview }: Creati
               >
                 <Palette className="w-4 h-4 md:w-6 md:h-6" style={{ color: accentColor }} />
               </div>
-              <h2 className="text-xl md:text-3xl font-bold">Experience</h2>
+              <h2 className="text-xl md:text-3xl font-bold">{t('sections.experience')}</h2>
             </div>
 
             <div className={`grid gap-3 md:gap-6 ${isMobilePreview ? 'grid-cols-1' : 'grid-cols-1 lg:grid-cols-2'}`}>
@@ -342,7 +344,7 @@ export function CreativePersonality({ portfolio, user, isMobilePreview }: Creati
                       </p>
                     </div>
                     <span className="text-[10px] md:text-xs text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-800 px-2 py-0.5 md:px-3 md:py-1 rounded-full whitespace-nowrap shrink-0 w-fit">
-                      {exp.startDate} - {exp.isCurrent ? 'Present' : exp.endDate}
+                      {exp.startDate} - {exp.isCurrent ? t('labels.present') : exp.endDate}
                     </span>
                   </div>
                   {exp.description && (
@@ -375,7 +377,7 @@ export function CreativePersonality({ portfolio, user, isMobilePreview }: Creati
               >
                 <Sparkles className="w-4 h-4 md:w-6 md:h-6" style={{ color: accentColor }} />
               </div>
-              <h2 className="text-xl md:text-3xl font-bold">Education</h2>
+              <h2 className="text-xl md:text-3xl font-bold">{t('sections.education')}</h2>
             </div>
 
             <div className="space-y-4">
@@ -400,7 +402,7 @@ export function CreativePersonality({ portfolio, user, isMobilePreview }: Creati
                       </p>
                     </div>
                     <span className="text-[10px] md:text-xs text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-800 px-2 py-0.5 md:px-3 md:py-1 rounded-full whitespace-nowrap shrink-0 w-fit">
-                      {edu.startDate} - {edu.isCurrent ? 'Present' : edu.endDate}
+                      {edu.startDate} - {edu.isCurrent ? t('labels.present') : edu.endDate}
                     </span>
                   </div>
                   {edu.description && (
@@ -433,7 +435,7 @@ export function CreativePersonality({ portfolio, user, isMobilePreview }: Creati
               >
                 <Brush className="w-4 h-4 md:w-6 md:h-6" style={{ color: accentColor }} />
               </div>
-              <h2 className="text-xl md:text-3xl font-bold">Projects</h2>
+              <h2 className="text-xl md:text-3xl font-bold">{t('sections.projects')}</h2>
             </div>
 
             <div className={`grid gap-3 md:gap-6 ${isMobilePreview ? 'grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
@@ -515,7 +517,7 @@ export function CreativePersonality({ portfolio, user, isMobilePreview }: Creati
               >
                 <Sparkles className="w-5 h-6 md:w-6 md:h-6" style={{ color: accentColor }} />
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold">Skills</h2>
+              <h2 className="text-2xl md:text-3xl font-bold">{t('sections.skills')}</h2>
             </div>
 
             <div className="flex flex-wrap gap-2 md:gap-3">
@@ -610,7 +612,7 @@ export function CreativePersonality({ portfolio, user, isMobilePreview }: Creati
             <p className="text-slate-400 dark:text-slate-500 text-sm">
               © {new Date().getFullYear()} {user?.name || 'Creative Portfolio'}
               <span className="mx-2">•</span>
-              <span style={{ color: accentColor }}>Made with love</span>
+              <span style={{ color: accentColor }}>{t('labels.madeWithLove')}</span>
             </p>
           </div>
         </footer>

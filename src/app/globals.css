@@ -8,6 +8,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-cairo: var(--font-cairo);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -119,4 +120,118 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Cairo font for Arabic */
+.font-cairo {
+  font-family: var(--font-cairo), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* RTL Utilities */
+[dir="rtl"] {
+  /* Flip flex directions */
+  .flex-row-rtl {
+    flex-direction: row-reverse;
+  }
+  
+  /* Flip text alignment */
+  .text-start-rtl {
+    text-align: right;
+  }
+  
+  .text-end-rtl {
+    text-align: left;
+  }
+  
+  /* Flip margins */
+  .ms-rtl {
+    margin-inline-start: 0;
+    margin-inline-end: auto;
+  }
+  
+  .me-rtl {
+    margin-inline-start: auto;
+    margin-inline-end: 0;
+  }
+  
+  /* Flip padding */
+  .ps-rtl {
+    padding-inline-start: 0;
+    padding-inline-end: 1rem;
+  }
+  
+  .pe-rtl {
+    padding-inline-start: 1rem;
+    padding-inline-end: 0;
+  }
+  
+  /* Flip border radius */
+  .rounded-s-rtl {
+    border-start-start-radius: 0;
+    border-start-end-radius: var(--radius);
+    border-end-start-radius: 0;
+    border-end-end-radius: var(--radius);
+  }
+  
+  .rounded-e-rtl {
+    border-start-start-radius: var(--radius);
+    border-start-end-radius: 0;
+    border-end-start-radius: var(--radius);
+    border-end-end-radius: 0;
+  }
+  
+  /* Flip borders */
+  .border-s-rtl {
+    border-inline-start: none;
+    border-inline-end: 1px solid var(--border);
+  }
+  
+  .border-e-rtl {
+    border-inline-start: 1px solid var(--border);
+    border-inline-end: none;
+  }
+  
+  /* Flip absolute positioning */
+  .start-rtl {
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+  }
+  
+  .end-rtl {
+    inset-inline-start: 0;
+    inset-inline-end: auto;
+  }
+}
+
+/* Custom scrollbar for RTL */
+[dir="rtl"]::-webkit-scrollbar {
+  direction: ltr; /* Keep scrollbar on the correct side */
+}
+
+/* Ensure proper RTL support for lists */
+[dir="rtl"] ol,
+[dir="rtl"] ul {
+  padding-inline-start: 1.5rem;
+  padding-inline-end: 0;
+}
+
+/* Fix icon rotation in RTL */
+[dir="rtl"] .rtl-rotate-180 {
+  transform: rotate(180deg);
+}
+
+[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
+}
+
+/* Arabic letter spacing - Arabic doesn't need letter spacing */
+[dir="rtl"] {
+  letter-spacing: normal;
+}
+
+/* Smooth font rendering for Arabic */
+[dir="rtl"] body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }

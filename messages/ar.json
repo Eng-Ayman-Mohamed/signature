@@ -1,0 +1,322 @@
+{
+  "common": {
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "view": "عرض",
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "تم بنجاح",
+    "confirm": "تأكيد",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "close": "إغلاق",
+    "search": "بحث",
+    "add": "إضافة",
+    "remove": "إزالة",
+    "upload": "رفع",
+    "download": "تحميل",
+    "copy": "نسخ",
+    "share": "مشاركة",
+    "preview": "معاينة",
+    "publish": "نشر",
+    "unpublish": "إلغاء النشر",
+    "reset": "إعادة تعيين",
+    "clear": "مسح",
+    "optional": "اختياري",
+    "required": "مطلوب"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "dashboard": "لوحة التحكم",
+    "portfolio": "الملف الشخصي",
+    "settings": "الإعدادات",
+    "profile": "الملف الشخصي",
+    "logout": "تسجيل الخروج",
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "about": "نبذة عني",
+    "experience": "الخبرات",
+    "education": "التعليم",
+    "projects": "المشاريع",
+    "skills": "المهارات",
+    "contact": "التواصل",
+    "layout": "التخطيط",
+    "personality": "الشخصية"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "resetPassword": "إعادة تعيين كلمة المرور",
+    "noAccount": "ليس لديك حساب؟",
+    "hasAccount": "لديك حساب بالفعل؟",
+    "loginWith": "المتابعة عبر {provider}",
+    "signupWith": "إنشاء حساب عبر {provider}",
+    "orContinueWith": "أو المتابعة عبر",
+    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+    "emailSent": "تم إرسال رابط إعادة التعيين",
+    "welcomeBack": "مرحباً بعودتك",
+    "createAccount": "أنشئ حسابك",
+    "getStarted": "ابدأ الآن",
+    "passwordStrength": {
+      "weak": "ضعيفة",
+      "fair": "مقبولة",
+      "good": "جيدة",
+      "strong": "قوية",
+      "excellent": "ممتازة"
+    }
+  },
+  "editor": {
+    "title": "محرر الملف الشخصي",
+    "unsavedChanges": "لديك تغييرات غير محفوظة",
+    "autoSave": "تم الحفظ تلقائياً",
+    "saving": "جاري الحفظ...",
+    "publishSuccess": "تم نشر الملف الشخصي بنجاح!",
+    "publishError": "فشل في نشر الملف الشخصي",
+    "sections": {
+      "about": {
+        "title": "نبذة عني",
+        "jobTitle": "المسمى الوظيفي",
+        "jobTitlePlaceholder": "مثال: مطور برمجيات",
+        "bio": "السيرة الذاتية",
+        "bioPlaceholder": "اكتب بضع جمل عن نفسك...",
+        "resumeUrl": "رابط السيرة الذاتية",
+        "resumeUrlPlaceholder": "https://...",
+        "avatar": "الصورة الشخصية"
+      },
+      "experience": {
+        "title": "الخبرات",
+        "addExperience": "إضافة خبرة",
+        "company": "الشركة",
+        "companyPlaceholder": "اسم الشركة",
+        "role": "الدور الوظيفي",
+        "rolePlaceholder": "دورك الوظيفي",
+        "location": "الموقع",
+        "locationPlaceholder": "المدينة، الدولة",
+        "startDate": "تاريخ البداية",
+        "endDate": "تاريخ النهاية",
+        "present": "حتى الآن",
+        "currentlyWorking": "أعمل هنا حالياً",
+        "description": "الوصف",
+        "descriptionPlaceholder": "صف مسؤولياتك وإنجازاتك...",
+        "noExperience": "لم تُضف أي خبرة بعد"
+      },
+      "education": {
+        "title": "التعليم",
+        "addEducation": "إضافة تعليم",
+        "institution": "المؤسسة التعليمية",
+        "institutionPlaceholder": "اسم الجامعة أو المدرسة",
+        "degree": "الدرجة العلمية",
+        "degreePlaceholder": "مثال: بكالوريوس، ماجستير",
+        "field": "التخصص",
+        "fieldPlaceholder": "مثال: علوم الحاسب",
+        "location": "الموقع",
+        "startDate": "تاريخ البداية",
+        "endDate": "تاريخ النهاية",
+        "currentlyStudying": "أدرس هنا حالياً",
+        "description": "الوصف",
+        "noEducation": "لم تُضف أي تعليم بعد"
+      },
+      "projects": {
+        "title": "المشاريع",
+        "addProject": "إضافة مشروع",
+        "projectTitle": "اسم المشروع",
+        "projectTitlePlaceholder": "اسم المشروع",
+        "description": "الوصف",
+        "descriptionPlaceholder": "صف مشروعك...",
+        "url": "رابط المشروع",
+        "urlPlaceholder": "https://...",
+        "imageUrl": "صورة المشروع",
+        "uploadImage": "رفع صورة",
+        "dragDropImage": "اسحب وأفلت أو انقر للرفع",
+        "github": {
+          "import": "استيراد من GitHub",
+          "stars": "نجوم",
+          "forks": "فروع"
+        },
+        "noProjects": "لم تُضف أي مشاريع بعد"
+      },
+      "skills": {
+        "title": "المهارات",
+        "addSkill": "إضافة مهارة",
+        "skillName": "اسم المهارة",
+        "skillNamePlaceholder": "مثال: JavaScript",
+        "category": "الفئة",
+        "categories": {
+          "technical": "تقنية",
+          "soft": "مهارات شخصية",
+          "tools": "أدوات"
+        },
+        "proficiency": "مستوى الإتقان",
+        "noSkills": "لم تُضف أي مهارات بعد"
+      },
+      "contact": {
+        "title": "التواصل",
+        "email": "البريد الإلكتروني",
+        "emailPlaceholder": "بريدك@الإلكتروني.com",
+        "linkedin": "رابط LinkedIn",
+        "linkedinPlaceholder": "https://linkedin.com/in/...",
+        "github": "رابط GitHub",
+        "githubPlaceholder": "https://github.com/...",
+        "twitter": "رابط Twitter",
+        "twitterPlaceholder": "https://twitter.com/...",
+        "website": "الموقع الإلكتروني",
+        "websitePlaceholder": "https://yourwebsite.com"
+      },
+      "theme": {
+        "title": "الشخصية",
+        "selectPersonality": "اختر الشخصية",
+        "personalities": {
+          "minimal": "بسيط",
+          "developer": "مطور",
+          "creative": "مبدع",
+          "elegant": "أنيق",
+          "futuristic": "مستقبلي"
+        },
+        "accentColor": "اللون المميز",
+        "density": "الكثافة",
+        "densities": {
+          "compact": "مضغوطة",
+          "normal": "عادية",
+          "spacious": "واسعة"
+        },
+        "reduceMotion": "تقليل الحركة"
+      },
+      "layout": {
+        "title": "التخطيط",
+        "sectionOrder": "ترتيب الأقسام",
+        "dragToReorder": "اسحب لإعادة ترتيب الأقسام"
+      },
+      "settings": {
+        "title": "الإعدادات",
+        "publishPortfolio": "نشر الملف الشخصي",
+        "publishDescription": "اجعل ملفك الشخصي متاحاً للعامة",
+        "publishedUrl": "ملفك الشخصي متاح على:",
+        "unpublishedWarning": "ملفك الشخصي لم يُنشر بعد",
+        "deleteAccount": "حذف الحساب",
+        "deleteWarning": "لا يمكن التراجع عن هذا الإجراء. سيتم حذف جميع بياناتك نهائياً."
+      }
+    }
+  },
+  "personalities": {
+    "sections": {
+      "about": "نبذة عني",
+      "experience": "الخبرات",
+      "education": "التعليم",
+      "projects": "المشاريع",
+      "skills": "المهارات",
+      "contact": "التواصل"
+    },
+    "labels": {
+      "present": "حتى الآن",
+      "viewProject": "عرض المشروع",
+      "viewOnGithub": "عرض على GitHub",
+      "letsTalk": "تواصل معي",
+      "sendMessage": "إرسال رسالة",
+      "madeWithLove": "صُنع بحب",
+      "website": "الموقع",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "downloadResume": "تحميل السيرة الذاتية",
+      "getInTouch": "تواصل معي",
+      "viewAllProjects": "عرض جميع المشاريع",
+      "viewFullProfile": "عرض الملف الكامل",
+      "connectWithMe": "تواصل معي",
+      "yearsExperience": "{count} سنوات خبرة",
+      "projectsCompleted": "{count} مشروع مكتمل",
+      "skillsMastered": "{count} مهارة متقنة"
+    },
+    "empty": {
+      "noProjects": "لا توجد مشاريع بعد",
+      "noExperience": "لم تُضف أي خبرة",
+      "noEducation": "لم تُضف أي تعليم",
+      "noSkills": "لم تُضف أي مهارات",
+      "noContact": "لم تُضف معلومات التواصل"
+    },
+    "hero": {
+      "hello": "مرحباً، أنا",
+      "welcome": "مرحباً بك في ملفي الشخصي",
+      "scrollDown": "اسحب للأسفل للاستكشاف",
+      "viewMyWork": "شاهد أعمالي"
+    }
+  },
+  "landing": {
+    "hero": {
+      "title": "ابنِ ملفك الشخصي الاحترافي",
+      "subtitle": "أنشئ ملفات شخصية مذهلة تعكس هويتك المهنية الفريدة",
+      "cta": "ابدأ مجاناً",
+      "learnMore": "اعرف المزيد"
+    },
+    "features": {
+      "title": "لماذا تختار Signature؟",
+      "subtitle": "كل ما تحتاجه لإنشاء ملف شخصي مذهل",
+      "lightning": {
+        "title": "سريع كالبرق",
+        "description": "ابنِ ملفك الشخصي الاحترافي في دقائق، لا ساعات. محررنا البديهي يجعل إنشاء الملف الشخصي سهلاً للغاية."
+      },
+      "themes": {
+        "title": "قوالب جميلة",
+        "description": "اختر من بين قوالب مذهلة وخصص الألوان والخطوط والتخطيطات لتتناسب مع علامتك الشخصية."
+      },
+      "ats": {
+        "title": "سير ذاتية متوافقة مع ATS",
+        "description": "أنشئ سير ذاتية PDF محسّنة تجتاز أنظمة تتبع المتقدمين وتساعدك في الحصول على مقابلات عمل أكثر."
+      },
+      "public": {
+        "title": "ملفات شخصية عامة",
+        "description": "انشر ملفك الشخصي برابط فريد وشاركه مع مسؤولي التوظيف والعملاء والمتعاونين."
+      },
+      "secure": {
+        "title": "آمن وخاص",
+        "description": "بياناتك مشفرة ومحمية. تحكم في ما تشاركه واحتفظ بمعلوماتك آمنة."
+      },
+      "export": {
+        "title": "تصدير إلى أي مكان",
+        "description": "حمّل ملفك الشخصي كـ PDF، شارك عبر رابط، أو ادمج مع سير عملك الحالي."
+      }
+    },
+    "howItWorks": {
+      "title": "كيف يعمل",
+      "step1": {
+        "title": "أنشئ حسابك",
+        "description": "سجّل في ثوانٍ عبر GitHub أو Google أو البريد الإلكتروني. لا حاجة لبطاقة ائتمان."
+      },
+      "step2": {
+        "title": "ابنِ ملفك الشخصي",
+        "description": "أضف خبراتك ومهاراتك ومشاريعك وتعليمك باستخدام محررنا البديهي."
+      },
+      "step3": {
+        "title": "شارك وتميّز",
+        "description": "انشر ملفك الشخصي، حمّل سيرتك الذاتية، واحصل على وظيفة أحلامك."
+      }
+    },
+    "value": {
+      "title": "ما تحصل عليه",
+      "items": [
+        "موقع ملف شخصي احترافي",
+        "سيرة ذاتية PDF متوافقة مع ATS",
+        "دعم نطاق مخصص",
+        "خيارات قوالب متعددة",
+        "تكامل مع GitHub",
+        "معاينة فورية",
+        "تصميم متجاوب مع الهواتف",
+        "تحديثات غير محدودة"
+      ]
+    }
+  },
+  "language": {
+    "switch": "تغيير اللغة",
+    "select": "اختر اللغة",
+    "en": "English",
+    "ar": "العربية",
+    "fr": "Français",
+    "es": "Español"
+  }
+}

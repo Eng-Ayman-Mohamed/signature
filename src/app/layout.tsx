@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Cairo } from "next/font/google";
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages } from 'next-intl/server';
+import { cookies } from 'next/headers';
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -13,6 +17,14 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+// Cairo font for Arabic - only loads when needed
+const cairo = Cairo({
+  variable: "--font-cairo",
+  subsets: ["arabic", "latin"],
+  display: "swap", // Prevent layout shift
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -41,28 +53,49 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+// RTL locales
+const RTL_LOCALES = ['ar'];
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Get locale from cookies or use default
+  const cookieStore = await cookies();
+  const savedLocale = cookieStore.get('NEXT_LOCALE')?.value || 'en';
+  const locale = savedLocale;
+  
+  // Determine if RTL
+  const isRTL = RTL_LOCALES.includes(locale);
+  const dir = isRTL ? 'rtl' : 'ltr';
+  
+  // Get messages for the locale
+  const messages = await getMessages();
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html 
+      lang={locale} 
+      dir={dir} 
+      suppressHydrationWarning
+      className={isRTL ? cairo.variable : ''}
+    >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} ${isRTL ? 'font-cairo' : ''} antialiased bg-background text-foreground`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-          <Toaster />
-          <AlertModal />
-        </ThemeProvider>
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster />
+            <AlertModal />
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
 }
-

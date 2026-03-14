@@ -1,0 +1,322 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "search": "Search",
+    "add": "Add",
+    "remove": "Remove",
+    "upload": "Upload",
+    "download": "Download",
+    "copy": "Copy",
+    "share": "Share",
+    "preview": "Preview",
+    "publish": "Publish",
+    "unpublish": "Unpublish",
+    "reset": "Reset",
+    "clear": "Clear",
+    "optional": "Optional",
+    "required": "Required"
+  },
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "portfolio": "Portfolio",
+    "settings": "Settings",
+    "profile": "Profile",
+    "logout": "Sign Out",
+    "login": "Login",
+    "signup": "Sign Up",
+    "about": "About Me",
+    "experience": "Experience",
+    "education": "Education",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact",
+    "layout": "Layout",
+    "personality": "Personality"
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "logout": "Sign Out",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "resetPassword": "Reset Password",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "loginWith": "Continue with {provider}",
+    "signupWith": "Sign up with {provider}",
+    "orContinueWith": "or continue with",
+    "invalidCredentials": "Invalid email or password",
+    "emailSent": "Reset email sent",
+    "welcomeBack": "Welcome back",
+    "createAccount": "Create your account",
+    "getStarted": "Get Started",
+    "passwordStrength": {
+      "weak": "Weak",
+      "fair": "Fair",
+      "good": "Good",
+      "strong": "Strong",
+      "excellent": "Excellent"
+    }
+  },
+  "editor": {
+    "title": "Portfolio Editor",
+    "unsavedChanges": "You have unsaved changes",
+    "autoSave": "Auto-saved",
+    "saving": "Saving...",
+    "publishSuccess": "Portfolio published successfully!",
+    "publishError": "Failed to publish portfolio",
+    "sections": {
+      "about": {
+        "title": "About Me",
+        "jobTitle": "Job Title",
+        "jobTitlePlaceholder": "e.g. Full Stack Developer",
+        "bio": "Bio",
+        "bioPlaceholder": "Write a few sentences about yourself...",
+        "resumeUrl": "Resume URL",
+        "resumeUrlPlaceholder": "https://...",
+        "avatar": "Profile Photo"
+      },
+      "experience": {
+        "title": "Experience",
+        "addExperience": "Add Experience",
+        "company": "Company",
+        "companyPlaceholder": "Company name",
+        "role": "Role",
+        "rolePlaceholder": "Your role",
+        "location": "Location",
+        "locationPlaceholder": "City, Country",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "present": "Present",
+        "currentlyWorking": "I currently work here",
+        "description": "Description",
+        "descriptionPlaceholder": "Describe your responsibilities and achievements...",
+        "noExperience": "No experience added yet"
+      },
+      "education": {
+        "title": "Education",
+        "addEducation": "Add Education",
+        "institution": "Institution",
+        "institutionPlaceholder": "University or school name",
+        "degree": "Degree",
+        "degreePlaceholder": "e.g. Bachelor's, Master's",
+        "field": "Field of Study",
+        "fieldPlaceholder": "e.g. Computer Science",
+        "location": "Location",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "currentlyStudying": "Currently studying here",
+        "description": "Description",
+        "noEducation": "No education added yet"
+      },
+      "projects": {
+        "title": "Projects",
+        "addProject": "Add Project",
+        "projectTitle": "Project Title",
+        "projectTitlePlaceholder": "Project name",
+        "description": "Description",
+        "descriptionPlaceholder": "Describe your project...",
+        "url": "Project URL",
+        "urlPlaceholder": "https://...",
+        "imageUrl": "Project Image",
+        "uploadImage": "Upload Image",
+        "dragDropImage": "Drag and drop or click to upload",
+        "github": {
+          "import": "Import from GitHub",
+          "stars": "stars",
+          "forks": "forks"
+        },
+        "noProjects": "No projects added yet"
+      },
+      "skills": {
+        "title": "Skills",
+        "addSkill": "Add Skill",
+        "skillName": "Skill Name",
+        "skillNamePlaceholder": "e.g. JavaScript",
+        "category": "Category",
+        "categories": {
+          "technical": "Technical",
+          "soft": "Soft Skills",
+          "tools": "Tools"
+        },
+        "proficiency": "Proficiency Level",
+        "noSkills": "No skills added yet"
+      },
+      "contact": {
+        "title": "Contact",
+        "email": "Email",
+        "emailPlaceholder": "your@email.com",
+        "linkedin": "LinkedIn URL",
+        "linkedinPlaceholder": "https://linkedin.com/in/...",
+        "github": "GitHub URL",
+        "githubPlaceholder": "https://github.com/...",
+        "twitter": "Twitter URL",
+        "twitterPlaceholder": "https://twitter.com/...",
+        "website": "Website",
+        "websitePlaceholder": "https://yourwebsite.com"
+      },
+      "theme": {
+        "title": "Personality",
+        "selectPersonality": "Select Personality",
+        "personalities": {
+          "minimal": "Minimal",
+          "developer": "Developer",
+          "creative": "Creative",
+          "elegant": "Elegant",
+          "futuristic": "Futuristic"
+        },
+        "accentColor": "Accent Color",
+        "density": "Density",
+        "densities": {
+          "compact": "Compact",
+          "normal": "Normal",
+          "spacious": "Spacious"
+        },
+        "reduceMotion": "Reduce Motion"
+      },
+      "layout": {
+        "title": "Layout",
+        "sectionOrder": "Section Order",
+        "dragToReorder": "Drag to reorder sections"
+      },
+      "settings": {
+        "title": "Settings",
+        "publishPortfolio": "Publish Portfolio",
+        "publishDescription": "Make your portfolio publicly accessible",
+        "publishedUrl": "Your portfolio is live at:",
+        "unpublishedWarning": "Your portfolio is not published yet",
+        "deleteAccount": "Delete Account",
+        "deleteWarning": "This action cannot be undone. All your data will be permanently deleted."
+      }
+    }
+  },
+  "personalities": {
+    "sections": {
+      "about": "About",
+      "experience": "Experience",
+      "education": "Education",
+      "projects": "Projects",
+      "skills": "Skills",
+      "contact": "Contact"
+    },
+    "labels": {
+      "present": "Present",
+      "viewProject": "View Project",
+      "viewOnGithub": "View on GitHub",
+      "letsTalk": "Let's Talk",
+      "sendMessage": "Send Message",
+      "madeWithLove": "Made with love",
+      "website": "Website",
+      "email": "Email",
+      "phone": "Phone",
+      "downloadResume": "Download Resume",
+      "getInTouch": "Get in Touch",
+      "viewAllProjects": "View All Projects",
+      "viewFullProfile": "View Full Profile",
+      "connectWithMe": "Connect with Me",
+      "yearsExperience": "{count} years experience",
+      "projectsCompleted": "{count} projects completed",
+      "skillsMastered": "{count} skills mastered"
+    },
+    "empty": {
+      "noProjects": "No projects yet",
+      "noExperience": "No experience added",
+      "noEducation": "No education added",
+      "noSkills": "No skills added",
+      "noContact": "No contact info provided"
+    },
+    "hero": {
+      "hello": "Hello, I'm",
+      "welcome": "Welcome to my portfolio",
+      "scrollDown": "Scroll down to explore",
+      "viewMyWork": "View My Work"
+    }
+  },
+  "landing": {
+    "hero": {
+      "title": "Build Your Professional Portfolio",
+      "subtitle": "Create stunning, personality-based portfolios that showcase your unique professional identity",
+      "cta": "Get Started Free",
+      "learnMore": "Learn More"
+    },
+    "features": {
+      "title": "Why Choose Signature?",
+      "subtitle": "Everything you need to create a stunning portfolio",
+      "lightning": {
+        "title": "Lightning Fast",
+        "description": "Build your professional portfolio in minutes, not hours. Our intuitive editor makes portfolio creation a breeze."
+      },
+      "themes": {
+        "title": "Beautiful Themes",
+        "description": "Choose from stunning templates and customize colors, fonts, and layouts to match your personal brand."
+      },
+      "ats": {
+        "title": "ATS-Ready Resumes",
+        "description": "Generate optimized PDF resumes that pass applicant tracking systems and land you more interviews."
+      },
+      "public": {
+        "title": "Public Portfolios",
+        "description": "Publish your portfolio with a unique URL and share it with recruiters, clients, and collaborators."
+      },
+      "secure": {
+        "title": "Secure & Private",
+        "description": "Your data is encrypted and protected. Control what you share and keep your information safe."
+      },
+      "export": {
+        "title": "Export Anywhere",
+        "description": "Download your portfolio as PDF, share via link, or integrate with your existing workflow."
+      }
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "step1": {
+        "title": "Create Your Account",
+        "description": "Sign up in seconds with GitHub, Google, or email. No credit card required."
+      },
+      "step2": {
+        "title": "Build Your Portfolio",
+        "description": "Add your experience, skills, projects, and education with our intuitive editor."
+      },
+      "step3": {
+        "title": "Share & Stand Out",
+        "description": "Publish your portfolio, download your resume, and land your dream job."
+      }
+    },
+    "value": {
+      "title": "What You Get",
+      "items": [
+        "Professional portfolio website",
+        "ATS-optimized resume PDF",
+        "Custom domain support",
+        "Multiple theme options",
+        "GitHub integration",
+        "Real-time preview",
+        "Mobile responsive design",
+        "Unlimited updates"
+      ]
+    }
+  },
+  "language": {
+    "switch": "Switch Language",
+    "select": "Select Language",
+    "en": "English",
+    "ar": "العربية",
+    "fr": "Français",
+    "es": "Español"
+  }
+}
