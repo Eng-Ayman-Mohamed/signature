@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
+import { ImageUpload } from '@/components/ui/image-upload';
 import { usePortfolioStore, type Project } from '@/store/portfolio-store';
 import { useAuthStore } from '@/store/auth-store';
 import { useAlert } from '@/hooks/use-alert';
@@ -485,13 +486,12 @@ export function ProjectsEditor() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="project-image">Image URL</Label>
-                  <Input
-                    id="project-image"
+                  <Label>Project Image</Label>
+                  <ImageUpload
                     value={formData.imageUrl}
-                    onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                    placeholder="https://..."
-                    className="bg-white dark:bg-slate-800"
+                    onChange={(url) => setFormData({ ...formData, imageUrl: url })}
+                    folder="signature/projects"
+                    placeholder="Upload project screenshot"
                   />
                 </div>
                 <div className="flex items-center gap-2 pt-6">
