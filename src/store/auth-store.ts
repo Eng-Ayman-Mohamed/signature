@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
 export type UserRole = 'USER' | 'ADMIN';
 
@@ -33,6 +33,28 @@ interface AuthState {
   setLoading: (loading: boolean) => void;
 }
 
+// Helper to get cookie value
+function getCookie(name: string): string | null {
+  if (typeof document === 'undefined') return null;
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
+  return null;
+}
+
+// Helper to parse user data from cookie
+function getUserFromCookie(): User | null {
+  try {
+    const userDataCookie = getCookie('user_data');
+    if (userDataCookie) {
+      return JSON.parse(decodeURIComponent(userDataCookie));
+    }
+  } catch (e) {
+    console.error('Failed to parse user data cookie:', e);
+  }
+  return null;
+}
+
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
@@ -62,6 +84,16 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: 'portfolio-auth',
+      storage: createJSONStorage(() => localStorage),
+      // On rehydration, check for cookie-based auth
+      onRehydrateStorage: () => (state) => {
+        // Check if we have auth cookies but no stored auth state
+        const cookieUser = getUserFromCookie();
+        if (cookieUser && (!state?.isAuthenticated || !state?.user)) {
+          // Restore auth from cookie
+          state?.login(cookieUser);
+        }
+      },
     }
   )
 );

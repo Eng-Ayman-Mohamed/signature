@@ -13,19 +13,18 @@ interface GoogleUser {
 }
 
 // Helper to create error redirect with provider info
-function createErrorRedirect(error: string, request: NextRequest, storedOrigin?: string): URL {
-  const appUrl = process.env.APP_URL;
-  const redirectOrigin = appUrl || storedOrigin || new URL(request.url).origin;
+function createErrorRedirect(error: string, request: NextRequest): URL {
+  // Always use the request's origin for error redirects
+  const redirectOrigin = new URL(request.url).origin;
   return new URL(`/?error=${error}&provider=google`, redirectOrigin);
 }
 
 export async function GET(request: NextRequest) {
   const clientId = process.env.GOOGLE_CLIENT_ID;
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
-  const storedOrigin = request.cookies.get('auth_origin')?.value;
 
   if (!clientId || !clientSecret) {
-    return NextResponse.redirect(createErrorRedirect('oauth_not_configured', request, storedOrigin));
+    return NextResponse.redirect(createErrorRedirect('oauth_not_configured', request));
   }
 
   const { searchParams } = new URL(request.url);
@@ -39,16 +38,16 @@ export async function GET(request: NextRequest) {
   if (error) {
     console.error('Google OAuth error:', error, errorDescription);
     if (error === 'access_denied') {
-      return NextResponse.redirect(createErrorRedirect('access_denied', request, storedOrigin));
+      return NextResponse.redirect(createErrorRedirect('access_denied', request));
     }
-    return NextResponse.redirect(createErrorRedirect('auth_failed', request, storedOrigin));
+    return NextResponse.redirect(createErrorRedirect('auth_failed', request));
   }
 
   // Verify state for CSRF protection
   const storedState = request.cookies.get('google_oauth_state')?.value;
 
   if (!code || !state || state !== storedState) {
-    return NextResponse.redirect(createErrorRedirect('invalid_auth', request, storedOrigin));
+    return NextResponse.redirect(createErrorRedirect('invalid_auth', request));
   }
 
   try {
@@ -75,9 +74,9 @@ export async function GET(request: NextRequest) {
     if (tokenData.error) {
       console.error('Google token error:', tokenData.error, tokenData.error_description);
       if (tokenData.error === 'redirect_uri_mismatch') {
-        return NextResponse.redirect(createErrorRedirect('redirect_uri_mismatch', request, storedOrigin));
+        return NextResponse.redirect(createErrorRedirect('redirect_uri_mismatch', request));
       }
-      return NextResponse.redirect(createErrorRedirect('token_error', request, storedOrigin));
+      return NextResponse.redirect(createErrorRedirect('token_error', request));
     }
 
     const accessToken = tokenData.access_token;
@@ -91,7 +90,7 @@ export async function GET(request: NextRequest) {
 
     if (!userResponse.ok) {
       console.error('Google user fetch error:', userResponse.status);
-      return NextResponse.redirect(createErrorRedirect('user_fetch_error', request, storedOrigin));
+      return NextResponse.redirect(createErrorRedirect('user_fetch_error', request));
     }
 
     const googleUser: GoogleUser = await userResponse.json();
@@ -214,14 +213,13 @@ export async function GET(request: NextRequest) {
       user = { ...user, portfolio } as typeof user;
     }
 
-    // Create response with redirect - use stored origin for proper redirect
+    // Create response with redirect - always use request origin for redirect
     const redirectPath = request.cookies.get('auth_redirect')?.value || '/';
-
-    // Use APP_URL or stored origin, fallback to request.url
-    const appUrl = process.env.APP_URL;
-    const redirectOrigin = appUrl || storedOrigin || new URL(request.url).origin;
+    
+    // Always use the request's origin for the redirect (this is where the user came from)
+    const redirectOrigin = new URL(request.url).origin;
     const finalRedirectUrl = new URL(redirectPath, redirectOrigin);
-
+    
     const response = NextResponse.redirect(finalRedirectUrl);
 
     // Clear OAuth cookies
@@ -281,7 +279,6 @@ export async function GET(request: NextRequest) {
     return response;
   } catch (error) {
     console.error('Google OAuth callback error:', error);
-    const storedOrigin = request.cookies.get('auth_origin')?.value;
-    return NextResponse.redirect(createErrorRedirect('auth_failed', request, storedOrigin));
+    return NextResponse.redirect(createErrorRedirect('auth_failed', request));
   }
 }
