@@ -26,34 +26,40 @@ interface AuthState {
   user: User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
+  _hasHydrated: boolean;
   login: (user: User) => void;
   logout: () => void;
   updateUser: (data: Partial<User>) => void;
   setUser: (user: User) => void;
   setLoading: (loading: boolean) => void;
+  setHasHydrated: (state: boolean) => void;
 }
 
-// Helper to get cookie value
-function getCookie(name: string): string | null {
-  if (typeof document === 'undefined') return null;
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
-  return null;
-}
-
-// Helper to parse user data from cookie
-function getUserFromCookie(): User | null {
-  try {
-    const userDataCookie = getCookie('user_data');
-    if (userDataCookie) {
-      return JSON.parse(decodeURIComponent(userDataCookie));
+// Safe storage that handles localStorage being blocked in iframes
+const safeStorage = {
+  getItem: (name: string): string | null => {
+    try {
+      return localStorage.getItem(name);
+    } catch {
+      // localStorage blocked (iframe with third-party cookies disabled)
+      return null;
     }
-  } catch (e) {
-    console.error('Failed to parse user data cookie:', e);
-  }
-  return null;
-}
+  },
+  setItem: (name: string, value: string): void => {
+    try {
+      localStorage.setItem(name, value);
+    } catch {
+      // localStorage blocked - ignore silently
+    }
+  },
+  removeItem: (name: string): void => {
+    try {
+      localStorage.removeItem(name);
+    } catch {
+      // localStorage blocked - ignore silently
+    }
+  },
+};
 
 export const useAuthStore = create<AuthState>()(
   persist(
@@ -61,19 +67,24 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       isLoading: false,
       isAuthenticated: false,
-      login: (user) => set({ user, isAuthenticated: true, isLoading: false }),
+      _hasHydrated: false,
+      login: (user) => set({ user, isAuthenticated: true, isLoading: false, _hasHydrated: true }),
       logout: () => {
         // Clear auth cookies
-        document.cookie = 'auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        document.cookie = 'user_data=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        document.cookie = 'portfolio_data=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        
-        // Clear persisted storage
-        if (typeof window !== 'undefined') {
-          localStorage.removeItem('portfolio-auth');
+        if (typeof document !== 'undefined') {
+          document.cookie = 'auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+          document.cookie = 'user_data=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+          document.cookie = 'portfolio_data=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+          
+          // Clear persisted storage
+          try {
+            localStorage.removeItem('portfolio-auth');
+          } catch {
+            // localStorage might be blocked in iframe
+          }
         }
         
-        set({ user: null, isAuthenticated: false });
+        set({ user: null, isAuthenticated: false, _hasHydrated: true });
       },
       updateUser: (data) =>
         set((state) => ({
@@ -81,18 +92,18 @@ export const useAuthStore = create<AuthState>()(
         })),
       setUser: (user) => set({ user }),
       setLoading: (loading) => set({ isLoading: loading }),
+      setHasHydrated: (state) => set({ _hasHydrated: state }),
     }),
     {
       name: 'portfolio-auth',
-      storage: createJSONStorage(() => localStorage),
-      // On rehydration, check for cookie-based auth
+      storage: safeStorage,
+      partialize: (state) => ({ 
+        user: state.user, 
+        isAuthenticated: state.isAuthenticated 
+      }),
+      // On rehydration, mark as complete
       onRehydrateStorage: () => (state) => {
-        // Check if we have auth cookies but no stored auth state
-        const cookieUser = getUserFromCookie();
-        if (cookieUser && (!state?.isAuthenticated || !state?.user)) {
-          // Restore auth from cookie
-          state?.login(cookieUser);
-        }
+        state?.setHasHydrated(true);
       },
     }
   )

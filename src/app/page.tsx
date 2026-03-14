@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useSyncExternalStore } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Eye, EyeOff, Settings, User, Briefcase, GraduationCap, FolderGit2, Wrench, Mail, Palette, Layout, LogOut, ChevronRight } from 'lucide-react';
 import { LandingPage } from '@/components/landing/landing-page';
@@ -159,24 +159,31 @@ function MobileNavContent({
 }
 
 export default function PortfolioBuilder() {
-  const { isAuthenticated, user, logout } = useAuthStore();
+  const { isAuthenticated, user, logout, _hasHydrated, setHasHydrated } = useAuthStore();
   const { portfolio, setPortfolio, setLoading, isLoading } = usePortfolioStore();
   const [activeTab, setActiveTab] = useState<EditorTab>('about');
   const [showPreview, setShowPreview] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [previewModalOpen, setPreviewModalOpen] = useState(false);
-  const [isHydrated, setIsHydrated] = useState(false);
 
-  // Wait for hydration to complete
+  // Set hydration as complete after mount - runs only on client
+  // This ensures we don't get stuck if localStorage is blocked in iframe
   useEffect(() => {
-    setIsHydrated(true);
-  }, []);
+    if (!_hasHydrated) {
+      // Small timeout to allow Zustand to attempt hydration from localStorage
+      const timeout = setTimeout(() => {
+        setHasHydrated(true);
+      }, 500);
+      return () => clearTimeout(timeout);
+    }
+  }, [_hasHydrated, setHasHydrated]);
 
   // Load portfolio on mount or when user changes
   useEffect(() => {
+    if (!_hasHydrated) return;
+    if (!isAuthenticated || !user?.id) return;
+    
     const loadPortfolio = async () => {
-      if (!isAuthenticated || !user?.id) return;
-      
       setLoading(true);
       try {
         // Always fetch fresh data from the database
@@ -194,13 +201,14 @@ export default function PortfolioBuilder() {
     };
 
     loadPortfolio();
-  }, [isAuthenticated, user?.id]);
+  }, [_hasHydrated, isAuthenticated, user?.id, setLoading, setPortfolio]);
 
   // Refresh user data from database on mount to ensure sync
   useEffect(() => {
+    if (!_hasHydrated) return;
+    if (!isAuthenticated || !user?.id) return;
+    
     const refreshUserData = async () => {
-      if (!isAuthenticated || !user?.id) return;
-      
       try {
         const response = await fetch(`/api/user?userId=${user.id}`);
         if (response.ok) {
@@ -217,7 +225,7 @@ export default function PortfolioBuilder() {
     };
 
     refreshUserData();
-  }, [isAuthenticated]);
+  }, [_hasHydrated, isAuthenticated, user?.id]);
 
   const handleLogout = () => {
     logout();
@@ -254,17 +262,6 @@ export default function PortfolioBuilder() {
         return <AboutEditor />;
     }
   };
-
-  if (!isHydrated) {
-    return (
-      <div className="h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
-          <p className="text-slate-400 text-sm">Loading...</p>
-        </div>
-      </div>
-    );
-  }
 
   if (!isAuthenticated) {
     return <LandingPage />;
